@@ -40,5 +40,7 @@ for bucket in $buckets
 	if [ ! $num == 0 ]; then
 		aws s3api delete-objects --bucket ${bucket_name} --delete "${out}"
 	fi
+
+	aws s3api delete-bucket --bucket $bucket_name
 }
 

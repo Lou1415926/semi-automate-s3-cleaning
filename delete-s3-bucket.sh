@@ -23,6 +23,12 @@ for bucket in $buckets
 		continue
 	fi
 
+	echo -n "Are you super sure? (\"Y\" to confirm; o/w skip): "
+	read -r confirmDeletion
+	if [ ! $confirmDeletion == "Y" ]; then
+		echo "[Skipped]"
+		continue
+	fi
 
 	# First empty the bucket by deleting all versioned object and markers within the bucket.
 	out=$(aws s3api list-object-versions \

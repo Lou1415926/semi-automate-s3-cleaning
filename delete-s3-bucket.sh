@@ -37,7 +37,7 @@ for bucket in $buckets
 	    --query='{Objects: Versions[].{Key:Key,VersionId:VersionId}}')
 	num=$(echo $out | jq '.Objects | length')
 	if [ ! $num == 0 ]; then
-		aws s3api delete-objects --bucket ${bucket_name} --delete "${out}"
+		aws s3api delete-objects --bucket ${bucket_name} --delete "${out}" | jq .
 	fi
 
 	out=$(aws s3api list-object-versions --bucket ${bucket_name} \
